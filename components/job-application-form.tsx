@@ -191,6 +191,7 @@ export default function JobApplicationForm() {
               <SelectItem value="thailand">Thailand</SelectItem>
               <SelectItem value="indonesia">Indonesia</SelectItem>
               <SelectItem value="malaysia">Malaysia</SelectItem>
+              <SelectItem value="malaysia">Singapore</SelectItem>
               <SelectItem value="other">Other</SelectItem>
             </SelectContent>
           </Select>
