@@ -31,7 +31,7 @@ export default function JobApplicationForm() {
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
-
+  const [location, setLocation] = useState<string>("");
   useEffect(() => {
     async function loadJobs() {
       try {
@@ -66,9 +66,12 @@ export default function JobApplicationForm() {
       formData.append("linkedin_url", elements.linkedin_url.value);
       formData.append("cv_url", elements.cv_url.value);
       formData.append("position", elements.position.value);
-      formData.append("location", elements.location.value);
+      formData.append(
+        "location",
+        location === "other" ? elements.custom_location.value : location
+      );
       formData.append("experience", elements.experience.value);
-      formData.append("coverLetter", elements.coverLetter?.value || "");
+      formData.append("cover_latter", elements.cover_latter?.value || "");
 
       // Handle file
       if (resumeOption === "file") {
@@ -181,7 +184,11 @@ export default function JobApplicationForm() {
         </div>
         <div>
           <Label>Location</Label>
-          <Select name="location" required>
+          <Select
+            name="location"
+            required
+            onValueChange={(val) => setLocation(val)}
+          >
             <SelectTrigger>
               <SelectValue placeholder="Select" />
             </SelectTrigger>
@@ -191,10 +198,18 @@ export default function JobApplicationForm() {
               <SelectItem value="thailand">Thailand</SelectItem>
               <SelectItem value="indonesia">Indonesia</SelectItem>
               <SelectItem value="malaysia">Malaysia</SelectItem>
-              <SelectItem value="malaysia">Singapore</SelectItem>
+              <SelectItem value="singapore">Singapore</SelectItem>
               <SelectItem value="other">Other</SelectItem>
             </SelectContent>
           </Select>
+          {location === "other" && (
+            <Input
+              name="custom_location"
+              placeholder="Please specify your location"
+              required
+              className="mt-2"
+            />
+          )}
         </div>
         <div>
           <Label>Experience</Label>
@@ -264,9 +279,9 @@ export default function JobApplicationForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="coverLetter">Cover Letter (Optional)</Label>
+        <Label htmlFor="cover_latter">Cover Letter (Optional)</Label>
         <Textarea
-          name="coverLetter"
+          name="cover_latter"
           placeholder="Why this role?"
           className="min-h-[120px]"
         />
