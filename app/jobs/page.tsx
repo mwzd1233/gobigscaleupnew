@@ -36,16 +36,18 @@ export default function JobsPage() {
         );
         const data = await res.json();
 
-        const mapped = data.map((job: any) => ({
-          id: job.id,
-          title: job.job_role,
-          type: job.type,
-          location: job.country,
-          description: job.description,
-          requirements: Array.isArray(job.skill) ? job.skill : [],
-        }));
+        const filtered = data
+          .filter((job: any) => job.status === true)
+          .map((job: any) => ({
+            id: job.id,
+            title: job.job_role,
+            type: job.type,
+            location: job.country,
+            description: job.description,
+            requirements: Array.isArray(job.skill) ? job.skill : [],
+          }));
 
-        setJobs(mapped);
+        setJobs(filtered);
       } catch (err) {
         console.error("Failed to fetch jobs:", err);
       }
