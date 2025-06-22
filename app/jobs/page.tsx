@@ -32,7 +32,7 @@ export default function JobsPage() {
     const fetchJobs = async () => {
       try {
         const res = await fetch(
-          "https://gobigscaleup-fb65e002836f.herokuapp.com/clientjob"
+          "https://gbsu-79591085eada.herokuapp.com/clientjob"
         );
         const data = await res.json();
 

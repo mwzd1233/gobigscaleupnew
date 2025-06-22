@@ -36,7 +36,7 @@ export default function JobApplicationForm() {
     async function loadJobs() {
       try {
         const resp = await fetch(
-          "https://gobigscaleup-fb65e002836f.herokuapp.com/clientjob"
+          "https://gbsu-79591085eada.herokuapp.com/clientjob"
         );
         const data = (await resp.json()) as Job[];
         setJobs(data);
@@ -81,7 +81,7 @@ export default function JobApplicationForm() {
 
       // Send formData
       const res = await fetch(
-        "https://gobigscaleup-fb65e002836f.herokuapp.com/ai/upload-cv",
+        "https://gbsu-79591085eada.herokuapp.com/ai/upload-cv",
         {
           method: "POST",
           body: formData,
